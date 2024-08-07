@@ -20,6 +20,9 @@ keywords = [
     "return",   #Returns a value from a function.      Usage: return ______. If used in a void function, it will return nothing. If used outside of a function, it will end the program.
     "static",   #Global variable declaration. Will make any variable with that name share the same variable (As static variables do).       Usage: static type x = ______
     "break"    #Breaks the current loop.       Usage: break NOTE THAT IF IT IS USED IN A FUNCTION, IT WILL RETURN NOTHING (LIKE VOID)
+    "continue"  #Skips the current iteration of the loop.      Usage: continue
+    "while"     #While loop.      Usage: while ______:
+    "for"       #For loop.        Usage: for ______:
 
 ]
 
