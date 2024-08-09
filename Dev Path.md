@@ -1,4 +1,4 @@
-#ESPRESSO DEVELOPMENT PATH
+=ESPRESSO DEVELOPMENT PATH=
 
 v0.1: Added support for tokens that weren't numbers or letters. ####*DONE*
 v0.2: Added support for INT's, FLOAT's, CHAR's, and CHARSTR's. ####*DONE*
