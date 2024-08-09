@@ -38,10 +38,10 @@ class Token:        #Used to define a new token. It gets assigned a type, a valu
         global last
         self.type = type
         self.value = value
-        if last != "RPAR" and add:
-            tokens.append(self)
-        elif add:
+        if (last == "RPAR" and add) or ((last == "PLUS" or last == "MINUS" or last == "MUL" or last == "DIV" or last == "MOD" or last == "EQUAL") and (self.type == "INT") and add):
             tokens.insert(len(tokens)-1, self)
+        elif add:
+            tokens.append(self)
         last = type
 
 
@@ -133,6 +133,7 @@ class Parser:
         global parenSets
         parens = []
         looking = False     #This variable is used only for error checking :D
+
         for i in tokens:
             if i.type == "LPAR":        #Adds every left parenthesis to a list so that if a right parenthesis is found, it can be paired with the last left parenthesis
                 parens.append(i)        #AND it can detect if a parenthesis set si inside another parenthesis set
@@ -177,14 +178,19 @@ class Parser:
             tokens.pop(len(tokens)-1)       #Removing tokens that are kinda bugged and shouldn;t be there
                 
 def finalize():         #Just replaces some CHARSTR's and CHAR's with KEYWORD's if they are a keyword so as little work has to be done by the runtime
-    global tokens, keywords
+    global tokens, keywords, ast
     for i in tokens:
         if (i.type == "CHARSTR" or i.type == "CHAR") and (i.value in keywords):
             i.type = "KEYWORD"
 
+    for i in ast:
+        for j in i.value:
+            if (j.type == "CHARSTR" or j.type == "CHAR") and (j.value in keywords):
+                j.type = "KEYWORD"
+
 
 #text = input("Espresso > ")
-text = "(321 + 3) / 6 + ((6 + 4) - 69.420)"        #THIS IS THE CODE THAT ACTUALLY GETS EXECUTED   
+text = "(if 321 + 3) / 6 + ((6 + 4) - 69.420)"        #THIS IS THE CODE THAT ACTUALLY GETS EXECUTED   
 
 Lexer.lex()
 Lexer.finalize()
@@ -196,4 +202,9 @@ finalize()
 for i in tokens:        #Just prints out the tokens list for debugging and development purposes
     print(i.type, i.value)
 
-print("______________________") #JUST UNDER 200 LINES WHOOP WHOOP
+print("______________________")
+
+for i in ast:
+    for j in i.value:
+        print(j.type, j.value)
+    print("______________________")
