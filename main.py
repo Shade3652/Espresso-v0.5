@@ -204,7 +204,7 @@ for i in tokens:        #Just prints out the tokens list for debugging and devel
 
 print("______________________")
 
-for i in ast:
+for i in ast:           #Just prints out the AST's for debugging and development purposes
     for j in i.value:
         print(j.type, j.value)
     print("______________________")
